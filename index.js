@@ -17,6 +17,12 @@ async function run() {
     try {
         await client.connect();
         const phonesCollection = client.db('eSmartInventory').collection('phones');
+        app.get('/inventory', async (req, res) => {
+            const query = {};
+            const cursor = phonesCollection.find(query);
+            const inventories = await cursor.toArray();
+            res.send(inventories);
+        })
     }
     finally {
 
