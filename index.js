@@ -30,6 +30,14 @@ async function run() {
             const inventory = await phonesCollection.findOne(query);
             res.send(inventory);
         });
+        //? delete an inventory item
+        app.delete('/inventory/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const inventory = await phonesCollection.deleteOne(query);
+            res.send(inventory);
+        });
+
 
     }
     finally {
