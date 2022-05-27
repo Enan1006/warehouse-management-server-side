@@ -22,7 +22,15 @@ async function run() {
             const cursor = phonesCollection.find(query);
             const inventories = await cursor.toArray();
             res.send(inventories);
-        })
+        });
+        //? get inventory item by id
+        app.get('/inventory/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const inventory = await phonesCollection.findOne(query);
+            res.send(inventory);
+        });
+
     }
     finally {
 
