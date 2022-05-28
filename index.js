@@ -30,6 +30,13 @@ async function run() {
             const inventory = await phonesCollection.findOne(query);
             res.send(inventory);
         });
+
+        //? add inventory item
+        app.post('/additem', async (req, res) => {
+            const newitem = req.body;
+            const result = await phonesCollection.insertOne(newitem);
+            res.send(result);
+        });
         //? delete an inventory item
         app.delete('/inventory/:id', async (req, res) => {
             const id = req.params.id;
@@ -38,6 +45,20 @@ async function run() {
             res.send(inventory);
         });
 
+        //? update stock of inventory ite
+        app.put('/inventory/:id', async (req, res) => {
+            const id = req.params.id;
+            const quantity = req.body.quantity;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    quantity: quantity,
+                }
+            };
+            const result = await phonesCollection.updateOne(filter, updatedDoc, options);
+            res.send(result)
+        })
 
     }
     finally {
