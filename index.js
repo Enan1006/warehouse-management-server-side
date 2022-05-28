@@ -71,6 +71,10 @@ app.get('/', (req, res) => {
     console.log('e-smart-inventory server is running');
 })
 
+app.get('/hero', (req, res) => {
+    console.log('Could nott meet hero');
+})
+
 app.listen(port, () => {
     console.log('Server is running on the port', port);
 })
