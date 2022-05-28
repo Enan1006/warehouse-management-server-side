@@ -58,7 +58,7 @@ async function run() {
             };
             const result = await phonesCollection.updateOne(filter, updatedDoc, options);
             res.send(result)
-        })
+        });
 
     }
     finally {
@@ -72,5 +72,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log('Server is running on port', port);
+    console.log('Server is running on the port', port);
 })
